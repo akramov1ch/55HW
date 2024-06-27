@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package="/proto";
+
+service TaskService {
+  rpc CreateTask (TaskRequest) returns (TaskResponse);
+  rpc ListTasks (Empty) returns (TaskList);
+  rpc CancelTask (CancelRequest) returns (CancelResponse);
+}
+
+message TaskRequest {
+  string task_description = 1;
+}
+
+message TaskResponse {
+  string task_id = 1;
+  string status = 2;
+}
+
+message TaskList {
+  repeated TaskResponse tasks = 1;
+}
+
+message CancelRequest {
+  string task_id = 1;
+}
+
+message CancelResponse {
+  string status = 1;
+}
+
+message Empty {}
